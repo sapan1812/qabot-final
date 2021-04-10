@@ -1,0 +1,44 @@
+version: '3.0'
+networks: {rasa-network: {}}
+services:
+  qabot:
+    env_file:
+      - ./.env
+    build: .
+    image: sapan1812/qabot:latest
+    ports:
+      - 5005:5005
+    volumes:
+      - ./models:/app/models
+      - ./config:/app/config
+      - ./actions:/app/actions
+    command:
+      - run
+      - --enable-api
+      - --model
+      - /app/models
+      - --endpoints
+      - /app/config/endpoints.local.yml
+    networks: [ 'rasa-network' ]
+  qabot-action:
+    env_file:
+      - ./.env
+    image: sapan1812/qabotactions:1.1
+    ports:
+      - 5055:5055
+    volumes:
+      - ./similarity:/app/similarity
+      - ./models:/app/models
+      - ./config:/app/config
+      - ./actions:/app/actions
+    networks: [ 'rasa-network' ]
+  rasa-x:
+    image: rasa/rasa-x:latest
+    expose:
+      - 5002
+    ports:
+      - 5002:5002
+    volumes:
+          - ./:/app
+    command: rasa x --no-prompt -m /models --endpoints /endpoints.yml --port 5005 --rasa-x-port 5002 --cors "*"
+    networks: [ 'rasa-network' ]

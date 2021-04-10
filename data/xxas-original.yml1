@@ -1,0 +1,93 @@
+version: "2.0"
+
+stories:
+
+- story: welcome path 1
+  steps:
+    - intent: welcome
+    - action: utter_welcome
+    - intent: subject
+    - action: utter_subject
+    - action: action_ready
+    - action: action_ask_question
+    - intent: answer
+    - action: get_answer
+    - action: utter_subject1
+    - action: action_ask_question
+    - intent: answer
+    - action: get_answer
+    - action: utter_subject2
+    - action: action_ask_question
+    - intent: answer
+    - action: get_answer
+    - action: utter_subject3
+    - action: action_ask_question
+    - intent: answer
+    - action: get_answer
+    - action: utter_subject4
+    - action: action_ask_question
+    - intent: answer
+    - action: get_answer
+    - action: utter_subject5
+    - action: get_similarity
+
+
+#- story: happy path
+#  steps:
+#  - intent: mood_great
+#  - action: utter_happy
+#  - intent: affirm
+#  - action: utter_happy
+
+
+
+#- story: welcome path 2
+#  steps:
+#    - action: utter_subject1
+#    - action: action_ask_question
+#    - intent: answer1
+#    - action: get_answer
+#    - action: action_ask_question
+#    - intent: answer1
+#    - action: get_answer
+#    - action: print_all_QnA
+
+
+
+#    - intent: answer1
+#    - action: utter_question2
+
+
+#- story: subject path
+#  steps:
+#    - intent: subject
+#    - action: utter_subject
+#    -
+
+#- story: nonsubject path
+#  steps:
+#    - intent: welcome
+#    - action: utter_welcome
+#    - intent: nonsubject
+#    - action: utter_nonsubject
+#    - action: utter_welcome
+
+#- story: sad path 1
+#  steps:
+#  - intent: mood_unhappy
+#  - action: utter_cheer_up
+#  - action: utter_did_that_help
+#  - action: utter_happy
+#
+#- story: sad path 2
+#  steps:
+#  - intent: mood_unhappy
+#  - action: utter_cheer_up
+#  - action: utter_did_that_help
+#  - intent: deny
+#  - action: utter_goodbye
+#
+#- story: ask subject
+#  steps:
+#    - intent: subject
+#    - action: utter_subject

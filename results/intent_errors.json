@@ -1,0 +1,18 @@
+[
+  {
+    "text": "1",
+    "intent": "subject",
+    "intent_prediction": {
+      "name": "nonsubject",
+      "confidence": 0.5250144600868225
+    }
+  },
+  {
+    "text": "1.",
+    "intent": "subject",
+    "intent_prediction": {
+      "name": "nonsubject",
+      "confidence": 0.5250144600868225
+    }
+  }
+]

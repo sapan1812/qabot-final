@@ -1,0 +1,52 @@
+{
+  "subject": {
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1-score": 0.6666666666666666,
+    "support": 4,
+    "confused_with": {
+      "nonsubject": 2
+    }
+  },
+  "nonsubject": {
+    "precision": 0.75,
+    "recall": 1.0,
+    "f1-score": 0.8571428571428571,
+    "support": 6,
+    "confused_with": {}
+  },
+  "my_question1": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 2,
+    "confused_with": {}
+  },
+  "welcome": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 13,
+    "confused_with": {}
+  },
+  "answer1": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 4,
+    "confused_with": {}
+  },
+  "accuracy": 0.9310344827586207,
+  "macro avg": {
+    "precision": 0.95,
+    "recall": 0.9,
+    "f1-score": 0.9047619047619048,
+    "support": 29
+  },
+  "weighted avg": {
+    "precision": 0.9482758620689655,
+    "recall": 0.9310344827586207,
+    "f1-score": 0.9244663382594417,
+    "support": 29
+  }
+}

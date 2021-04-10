@@ -1,0 +1,46 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- subject:
+    use_entities: true
+- nonsubject:
+    use_entities: true
+- welcome:
+    use_entities: true
+- answer:
+    use_entities: true
+entities: []
+slots: {}
+responses:
+  utter_welcome:
+  - text: |-
+      Hey! I'm BOT. Welcome to this test. Which subject you are interested in?
+       1. Python
+       2. SQL
+       3. Swift
+  utter_subject:
+  - text: Alright! Lets begin with the Test.
+  utter_subject1:
+  - text: Successfully completed 1st question.
+  utter_subject2:
+  - text: Successfully completed 2nd question.
+  utter_subject3:
+  - text: Successfully completed 3rd question.
+  utter_subject4:
+  - text: Successfully completed 4th question.
+  utter_subject5:
+  - text: Successfully completed 5th question.
+  utter_nonsubject:
+  - text: Not Available
+actions:
+- action_ready
+- action_ask_question
+- get_answer
+- get_similarity
+
+forms: {}
+e2e_actions: []

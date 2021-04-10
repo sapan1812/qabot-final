@@ -1,0 +1,8 @@
+version: "2.0"
+
+rules:
+
+- rule: Say welcome anytime the user says Hi
+  steps:
+  - intent: welcome
+  - action: utter_welcome

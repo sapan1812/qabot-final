@@ -1,0 +1,9 @@
+nlu:
+  url: http://rasa_nlu:5000
+action_endpoint:
+  url: http://qabot-action:5055/webhook
+#
+#nlu:
+#  url: http://rasa_nlu:5000
+#action_endpoint:
+#  url: http://localhost:5055/webhook

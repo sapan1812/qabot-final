@@ -1,0 +1,10 @@
+## Setup py requirements
+rasa-sdk==2.4.1
+pandas==1.0.5
+nltk==3.5
+matplotlib==3.4.1
+scikit-learn==0.24.1
+gensim==3.7.0
+wordcloud ==1.8.1
+scipy==1.5.1
+spacy

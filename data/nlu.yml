@@ -1,0 +1,195 @@
+version: "2.0"
+
+nlu:
+- intent: welcome
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: subject
+  examples: |
+    - python
+    - Python
+    - 1
+    - 1.
+
+- intent: nonsubject
+  examples: |
+    - hadoop
+    - Swift
+    - swift
+    - 2
+    - 3
+    - Hadoop
+
+- intent: answer
+  examples: |
+    - python is easy to use
+    - use random.choice import random foo = [''a'','b'','c'','d'','e''] print(random.choice(foo))
+    - yes. use os.path.splitext  import os  filename, file_extension = os.path.splitext(''pathtosomefile.ext'')  filename 'pathtosomefile''  file_extension'.ext''
+    - import os.path extension = os.path.splitext(filename)[1]
+    - the most pythonic way to check the type of an object is... not to check it. since python encourages duck typing, you should just try to use the object''s methods the way you want to use them. so if your function is looking for a writable file object, don''t check that it''s a subclass of file, just try to use its .write()  method! of course, sometimes these nice abstractions break down and isinstance(obj,cls) is what you need. but use sparingly.
+    - i think the cool thing about using a dynamic language like python is you really shouldn''t have to check something like that. i would just call the required methods on your object and catch an attributeerror. later on this will allow you to call your methods with other (seemingly unrelated) objects to accomplish different tasks, such as mocking an object for testing. i''ve used this alot when getting data off the web with urllib2.urlopen() which returns a file like object. this can in turn can be passed to almost any method that reads from a file, because is implements the same read() method as a real file. but i''m sure there is a time and place for using isinstance(), otherwise it probably wouldn''t be there)
+    - isinstance(o, str) link
+    - isinstance(o, str) will return true if o is an str or is of a type that inherits from str. type(o) == str will return true if and only if o is a str. it will return false if o is of a type that inherits from str.
+    - to check if the type of o is exactly str type(o) is str to check if o is an instance of str or any subclass of str (this would be the "canonical" way) isinstance(o, str) the following also works, and can be useful in some cases issubclass(type(o), str) type(o) in ([str] + str.__subclasses__()) see built-in unctions in the python library reference for relevant information. one more note in this case, you may actually want to use isinstance(o, basestring) because this will also catch unicode strings (unicode is not a subclass of str; both str and unicode are subclasses of basestring). alternatively, isinstance accepts a
+    - from the python docs on os.walk():delete everything reachable from the  directory named in'top'',:assuming there are no symbolic links.:caution  this is dangerous! for example, if top ==''', it:could delete all your disk  files. import os for root, dirs, files in os.walk(top, topdown=false) for name  in files os.remove(os.path.join(root, name)) for name in dirs os.rmdir(os.path.join(root,  name))
+    - import shutil shutil.rmtree(''folder_name'') standard library reference shutil.rmtree.
+    - if you need to transform keys or values before creating a dictionary then a generator expression could be used. example  adict = dict((str(k), v) for k, v in zip([''a'', 1,'b''], [2,'c'', 3])) take a look code like a pythonista idiomatic python.
+    - try this  import itertools  keys = (''name'','age'','food'')  values  (''monty'', 42,'spam'')  adict = dict(itertools.izip(keys,values))  adict  {''food'''spam'','age'' 42,'name'''monty''} it was the simplest solution  i could come up with. ps it''s also more economical in memory consumption compared  to zip.
+    - keys = (''name'','age'','food'')  values = (''monty'', 42,'spam'')  dict(zip(keys,  values)) {''food'''spam'','age'' 42,'name'''monty''}
+    - like this  keys = [''a'','b'','c'']  values = [1, 2, 3]  dictionary  dict(zip(keys, values))  print dictionary {''a'' 1,'b'' 2,'c'' 3} voila  ) the pairwise dict constructor and zip function are awesomely useful
+    - this was trivial. each module has a __file__ variable that shows its relative  path from where you are right now. therefore, getting a directory for the module  to notify it is simple as os.path.dirname(__file__)
+    - import a_module print a_module.__file__ will actually give you the path  to the .pyc file that was loaded, at least on mac os x. so i guess you can do  import os path = os.path.dirname(amodule.__file__) you can also try path = os.path.abspath(amodule.__file__)  to get the directory to look for changes.
+    - for cross language projects i found out that strings containing rfc 3339  dates are the best way to go. a rfc 3339 date looks like this 1985-04-12t232050.52z  i think most of the format is obvious. the only somewhat unusual thing may be  the "z" at the end. it stands for gmtutc. you could also add a timezone offset  like +0200 for cest (germany in summer). i personally prefer to keep everything
+    - i think your best bet is to match for all curly braced entries, and then  check against python itself whether or not it''s valid python, for which compiler  would be helpful.
+    - don''t know if this will work for a wxpython application, but in the sys  module you can overwrite the excepthook attribute, which is a function called  with 3 arguments, (type, value, traceback), when an uncaugth exception is caught.  you can install your own function in there that handles only the exceptions you  want, and call the original function for all the others. consult
+    - perhaps this question might be of some use, it tries to capture all exceptions.
+    - so what''s wrong with pickle? if you structure your data as a list of dicts,  then everything should work as you want it to (if i understand your problem).  import  pickle  d1 = {1''one'', 2''two'', 3''three''}  d2 = {1''eleven'', 2''twelve'',  3''thirteen''}  d3 = {1''twenty-one'', 2''twenty-two'', 3''twenty-three''}  data  [d1, d2, d3]  out = open(''data.pickle'','wb'')  pickle.dump(data, out)  out.close()  input open(''data.pickle'')  data2 = pickle.load(input)  data == data2 true
+    - this may be an editline issue; libedit may not accept utf-8 characters
+    - using the writefunction, instead of turning it off would save you a lot off trouble. you might want to rewrite your pageasstring by utilizing writefunction..  as an example from cstringio import stringio c = pycurl.curl() buffer = stringio()  c.setopt(pycurl.writefunction, buffer.write) c.setopt(pycurl.url, " c.perform()  ... buffer.getvalue():will return the data fetched.
+    - do you have a typo in positionchanged() ? def positionchanged(self, newpos)  self.snappedpos = snaptogrid(newpos, y_offset, y_step) i guess you are off by  one pixel because of the accuracy problems during float division. try changing  your snaptogrid() to this def snaptogrid(originalpos, offset, step) eps = 1e-6  index = int((originalpos - offset)  step + eps)truncates the remainder away  return index * gap + offset
+    - if you want to exit based on time, you can use the signal module''s alarm(time)  function, and the catch the sigalrm - here''s an example you can let the user  interrupt the program in a sane manner by catching keyboardinterrupt. simply catch  the keyboardinterrupt exception from outside you main loop, and do whatever cleanup  you want. if you want to continue later where you left off, you will have to add  some sort persistence. i would pickle a data structure to disk, that you could  read back in to continue the operations. i haven''t tried anything like this,  but you could look into using something like memoizing, and caching to the disk.    - read the fabulous manual
+    - in your %appdata% directory visual studio saves a list of websites used  in visual studio, with some settings of that site on my vista machine the exact
+    - you could do something like this to generate fibonnacci numbers for 1 second  then stop. fibonnacci = [1,1] stoptime = time.time() + 1:set stop time to 1  second in the future while time.time()  stoptime fibonnacci.append(fibonnacci[-1]+fibonnacci[-2])  print "generated %s numbers, the last one was %s." % (len(fibonnacci),fibonnacci[-1])  i''m not sure how efficient it is to call time.time() in every loop - depending  on the what you are doing inside the loop, it might end up taking a lot of the  performance away.
+    - you could use a generator for this def finished() "define your exit condition  here" return ... def count(i=0) while not finished() yield i i += 1 for i in  count() print i if you want to change the exit condition you could pass a value  back into the generator function and use that value to determine when to exit.
+    - i happened to post a blog on implementing john conway''s game of life in  xamlwpf using embedded python. it might be of interest to you.
+    - it is perfectly acceptable to have a'cleanup()'' function that you call  at the end of your script, which will call'os.remove()'' on your files.
+    - thanks for the answer, there may be a typo, but i can''t see it... unfortunately  the change to snaptogrid didn''t make a difference, so i don''t think that''s  the issue. it''s not off by one pixel, but rather it''s off by y_step. playing
+    - hm... that would do it baselen = len(self.basepath) for path in paths  path = path[baselen].replace("", "\\") newpaths.append(path) return newpaths  if you like, you can do it like this baselen = len(self.basepath) return (path[baselen].replace("",  "\\") for path in paths) not calculating baselen in every loop iteration is also  good practice.
+    - there are two ways i could imagine handling this have your backend script  (python) output the information of a long process to a log of some sort (text  file, database, session, etc...) and then have javascript grab the information  via ajax and update the current page. same deal, but instead of ajax just have  a meta refresh on the page which would grab the latest updated information.
+    - check the max_packet setting in your my.cnf file. this determines the largest  amount of data you can send to your mysql server in a single statement. exceeding  this values results in that error.
+    - i will start answering this question here while we perform tests but i''d  love to have feedback from other users. install we have spent a small afternoon  from tuto to "how to" to finally install and run the thing on a virtual machine.  this one is ok  there are setuptools packages but this does not works out of  the box (and certainly not without compiling anything). we had to install  setuptools  >= 0.6c5 (tested with 0.6c9 from of course, compilation implies installing gcc,  linux-header et lib6-dev libxslt in dev (we used libxslt1-dev) linking with zl  so zlib (we used zlib1g-dev) you''d better install pastescript before starting  the deliverance install installing python-nose is not mandatory but it helps to  check if everything went fine we did not manage to make it works with python-virtualenv  to we definitly messed up the debian system but it seems to run ok. hope it can  help.
+    - if your python application runs in the 64-bit space, you will need to access  a 64-bit installation of oracle''s oci.dll, rather than the 32-bit version. normally  you would update the system path to include the appropriate oracle home bin directory,  prior to running the script. the solution may also vary depending on what component  you are using to access oracle from python.
+    - you need to append the c\oracle32\bin directory to the path variable of  your environment before you execute python.exe. in linux, i need to set up the  ld_library_path variable for similar reasons, to locate the oracle libraries,  before calling python. i use wrapper shell scripts that set the variable and then  call python. in your case, maybe you can call, in the service startup, a .cmd  or .vbs script that sets the path variable and then calls python.exe with your  .py script. i hope this helps!
+    - if you really want your function to run and still wants user (or system)  input, you have two solutions multi-thread multi-process it will depend on how  fine the interaction. if you just want to interrupt the function and don''t care  about the exit, then multi-process is fine. in both cases, you can rely on some  shared resources (file or shared memory for multi-thread, variable with associated  mutex for multi-thread) and check for the state of that resource regularly in  your function. if it is set up to tell you to quit, just do it. example on multi-thread  from threading import thread, lock from time import sleep class myfct(thread)  def __init__(self) thread.__init__(self) self.mutex = lock() self._quit = false  def stopped(self) self.mutex.acquire() val = self._quit self.mutex.release()  return val def stop(self) self.mutex.acquire() self._quit = true self.mutex.release()  def run(self) i = 1 j = 1 print i print j while true if self.stopped() return  i,j = j,i+j print j def main_fct() t = myfct() t.start() sleep(1) t.stop() t.join()  print "exited" if __name__ == "__main__" main_fct()
+    - you''ll probably get some good documentation here
+    - it probably is only trying to add it on your instance of vs. you have to  remove the cache so vs thinks its no longer under ss under file -> sourcecontrol  workspaces select the ss location edit choose the working folder remove!
+    - those things are pernicious! visual studio sticks links to sourcesafe in  everywhere, including into the xml that makes up your sln file. i wrote an article  about my experiences converting sourcesafe to subversion, and included with it  the python script that i used to clean out the junk. please note 1) this is very  lightly tested. make backups so you don''t screw up your sln*proj files. run  your test suite before and after to make sure it didn''t screw up something (how  could it? who knows! but stranger things have happened.) 2) this may have been  with a different version of sourcesafe and visual studio in mind, so you may need  to tweak it. anyway, without further ado import os, re proj_re = re.compile(r"^\s+scc")  sln_re = re.compile(r"globalsection\(sourcecodecontrol\).*?endglobalsection",  re.dotall) vdproj_re = re.compile(r"^\"scc") for (dir, dirnames, filenames) in  os.walk(''.'') for fname in filenames fullname = os.path.join(dir, fname) if  fname.endswith(''scc'') os.unlink(fullname) elif fname.endswith(''vdproj'')  installer project has a different format fin = file(fullname) text = fin.readlines()  fin.close() fout = file(fullname,'w'') for line in text if not vdproj_re.match(line)  fout.write(line) fout.close() elif fname.endswith(''csproj'') fin = file(fullname)  text = fin.readlines() fin.close() fout = file(fullname,'w'') for line in text  if not proj_re.match(line) fout.write(line) fout.close() elif fname.endswith(''sln'')  fin = file(fullname) text = fin.read() fin.close() text = sln_re.sub("", text)  fout = file(fullname,'w'') fout.write(text)
+    - it all depends on what code you are parsing. if you are parsing python  syntax, use the parser module from python a quite complete list of parser libraries  available for python you can find at
+    - check out pyparsing, it allows for definition of the grammar directly in  python code assuming a function call is just somename()  from pyparsing import  *  grammar = word(alphas + "_", alphanums + "_")("func_name") + "()" + stringend()  grammar.parsestring("ab() ")["func_name"]  "ab"
+    - take a look at ply. it should help you keep your parser specification clean.
+    - thanks guys. after doing some more searching i found exactly what i was  looking for here. it''s an example project directory structure and settings.py.  if you view the comments there you can see a lot of others were confused about  this as well and found the example helpful. it would be nice if django created  a recommended dir structure so you know where to store css, js, django app files,  template files, etc.
+    - don''t use apache for development, that''ll make you tear your hair out  restarting apache every fifteen seconds (edit or you could just use pythondebug  on). this technique is how to get your media (stylesheets, etc) loading via the  development server. if you used that exact snippet, you''d need to set media_url  to'site_media'' and media_root to'pathtomedia'' (obviously this latter  is likely to need changing to wherever your media files actually are).
+    - there''s a lot to your question, so i''ll try to boil it down to this  the tutorial is aimed at getting you to use the framework and to be up and running  with as little configuration as possible. no server to configure, etc. if you  are trying to load css with the dev server, you will need to pull the css from  somewhere "beyond" the dev server. for example, on my mac, i launch the dev server,  but load the css from the built-in apache server. there is more info available  about using apache and mod-python here mod_python and apache setup info i''m  not sure what you mean by "creating the directory structure", but most of the  core application files are typically created by running the django-admin.py script,  by running startproject and startapp. this is demonstrated in the tutorial. you  can also ask questions on the irc django channel! if you are looking for a book  on the subject, you can also check out the django book.
+    - send the 50 quid to me ) (i''m kidding, of course)
+    - try here instead. these are places where you can hire people to do small  freelance work for you.
+    - you probably don''t need to pay to learn python. implementing cellular  automata makes for good starting project. the best place to start with python  is the official tutorial and you can follow that with dive into python. the answers  here and here may be helpful as well. if you can bear the self-praising and claims  to godness wolfram''s book is a good way to get a feel for cellular automata,  but don''t take the book itself too seriously (that''s a separate issue that can  fill several blog posts). he also has a set of papers on this stuff that is published  as a book that goes into all the details. and of course if you just google for  cellular automata and conway''s game you''ll find a myriad of implementations  and explanations.
+    - if you use a child thread to run the function while the main thread waits  for character input it should work. just remember to have something that stops  the child thread (in the example below the global runthread) for example import  threading, time runthread = 1 def myfun() while runthread print "a" time.sleep(.1)  t = threading.thread(target=myfun) t.start() raw_input("") runthread = 0 t.join()  does just that
+    - there''s a few people on the pygame.org website who''ve done their versions  of the game of life. maybe they''ll be of help pygame.org - search "life"    - just tried the code to make sure, but this does do what it''s supposed  to... you can type q and enter in to the console and make the application quit  before a=0 (so it says hey less then 5 times) i don''t know what you mean by the  raw_input dialog, raw_input normally just takes info from stdin
+    - sys.path is python''s internal representation of the pythonpath, it sounds  to me like you want to modify the path. i''m not sure that this will work, but  you can try import os os.environ[''path''] += os.pathsep + "c\\oracle32\\bin"
+    - as in almost all languages while true:check what you want and eventually  break print nextvalue() the second part of your question is more interesting  also, if it is based on time then is there anyway i could just extend the time  and start it going from that point again rather than having to start again from  0 you can use a yield instead of return in the function nextvalue()
+    - "i don''t find the error at compile but at run time" correct. true for  all non-compiled interpreted languages. "i need to change and run the script again"  also correct. true for all non-compiled interpreted languages. "is there a way  to have it break and let me modify and run?" what? if it''s a run-time error,  the script breaks, you fix it and run again. if it''s not a proper error, but  a logic problem of some kind, then the program finishes, but doesn''t work correctly.  no language can anticipate what you hoped for and break for you. or perhaps you  mean something else. "...code that needs a lot of enums" you''ll need to provide  examples of code that needs a lot of enums. i''ve been writing python for years,  and have no use for enums. indeed, i''ve been writing c++ with no use for enums  either. you''ll have to provide code that needs a lot of enums as a specific example.  perhaps in another question along the lines of "what''s a pythonic replacement  for all these enums." it''s usually polymorphic class definitions, but without  an example, it''s hard to be sure.
+    - python is an interpreted language, there is no compile stage, at least  not that is visible to the user. if you get an error, go back, modify the script,  and try again. if your script has long execution time, and you don''t want to  stop-restart, you can try a debugger like pdb, using which you can fix some of  your errors during runtime. there are a large number of ways in which you can  implement enums, a quick google search for "python enums" gives everything you''re  likely to need. however, you should look into whether or not you really need them,  and if there''s a better, more'pythonic'' way of doing the same thing.
+    - with interpreted languages you have a lot of freedom. freedom isn''t free  here either. while the interpreter won''t torture you into dotting every i and  crossing every t before it deems your code worthy of a run, it also won''t try  to statically analyze your code for all those problems. so you have a few choices.  1) {pyflakes, pychecker, pylint} will do static analysis on your code. that settles  the syntax issue mostly. 2) test-driven development with nosetests or the like  will help you. if you make a code change that breaks your existing code, the tests  will fail and you will know about it. this is actually better than static analysis  and can be as fast. if you test-first, then you will have all your code checked  at test runtime instead of program runtime. note that with 1 &amp; 2 in place  you are a bit better off than if you had just a static-typing compiler on your  side. even so, it will not create a proof of correctness. it is possible that  your tests may miss some plumbing you need for the app to actually run. if that  happens, you fix it by writing more tests usually. but you still need to fire  up the app and bang on it to see what tests you should have written and didn't.    - you might want to look into something like nosey, which runs your unit  tests periodically when you''ve saved changes to a file. you could also set up  a save-event trigger to run your unit tests in the background whenever you save  a file (possible e.g. with komodo edit). that said, what i do is bind the f7 key  to run unit tests in the current directory and subdirectories, and the f6 key  to run pylint on the current file. frequent use of these allows me to spot errors  pretty quickly.
+    - the simplest way is just to write a program with an infinite loop, and  then hit control-c to stop it. without more description it''s hard to know if  this works for you. if you do it time-based, you don''t need a generator. you  can just have it pause for user input, something like a "continue? [yn]", read  from stdin, and depending on what you get either exit the loop or not.
+    - you mean the while loop runs before the thread? well, you can''t predict  this unless you synchronize it. no one guarantees you that the thread will run  before or after that while loop. but if it''s being blocked for 5 seconds that''s  akward - the thread should have been pre-empted by then. also, since you''re first  use of wanttoquit is in the run() method, no one assures you that the thread has  been started when you''re checking for it''s wanttoquit attribute in while not  mythread.wanttoquit .
+    - the behaviour here is not what you described. look at those sample outputs  i got 1st pressing qenter as fast as possible hey q 2nd wait a bit before  pressing qenter hey hey hey q 3rd don''t touch the keyboard hey hey hey hey  hey hey:application locks because main thread is over but:there are other  threads running. add mythread.wantquit = 1:to prevent that if you want
+    - huperboreean has your answer. the thread is still being started when the  for loop is executed. you want to check that a thread is started before moving  into your loop. you could simplify the thread to monitor raw_input, and return  when a'q'' is entered. this will kill the thread. you main for loop can check  if the thread is alive.
+    - i think you can get the result you want by doing something like this for  i in range(2, 11) print 1.0*(1 % i)  i this computes the (integer) remainder  as explained by others. then you divide by the denominator again, to produce the  fractional part of the quotient. note that i multiply the result of the modulo  operation by 1.0 to ensure that a floating point division operation is done (rather  than integer division, which will result in 0).
+    - modulo is performed in the integer context, not fractional (remainders  are integers). therefore 1 % 1 = 0 (1 times 1 plus 0) 1 % 2 = 1 (2 times 0 plus  1) 1 % 3 = 1 (3 times 0 plus 1) 6 % 3 = 0 (3 times 2 plus 0) 7 % 3 = 1 (3 times  2 plus 1) 8 % 3 = 2 (3 times 2 plus 2) etc how do i get the actual remainder of  x  y? by that i presume you mean doing a regular floating point division? for  i in range(2, 11) print 1.0  i
+    - wouldn''t dividing 1 by an number larger than it result in 0 with remainder 1? the number theorists in the crowd may correct me, but i think modulusremainder is defined only on integers.
+    - you''ve confused division and modulus. "0.5, 0.333333, 0.25" etc. as i expected (12 = 0.5, etc)." that''s the result of division. not modulus. modulus (%) is the remainder left over after integer division. your sample values are simple division, which is the  operator. not the % operator.
+    - it seems you are trying to use the solution marked in this question. if  your goal is access values in a loop, you should just use a list. this weird concept  of variable names with numbers in them is not one that should be used in any language.  try this. vals = [''foo'','bar'','blah'', 67, -0.4,'your mom''] for i in  range(len(vals)) print(vals[i]) that is the correct way to have a list of values  indexed by an integer, not putting it in the variable name.
+    - it looks like the code you''re generating expands to e0=zbc e1=2.3 at  the next iteration through the loop, you''ll get an indexerror exception because  a is only two elements long. so given the above, you are trying to assign the  value of zbc to e0. if zbc doesn''t exist (which it seems that it doesn''t), then  you will get the nameerror you mention. it''s hard to determine what you''re actually  trying to do with this code, so i''m not sure what to recommend.
+    - A_Body "just keep in mind thatexec' executes whatever string you pass in to it as if you typed it in your .py file or the interpreter. when debugging exec()  related code, it's helpful to log whatever you're about toexec' when you run
+    - okay. this code is very weird. as a one liner like this, it''s not syntactically correct, but i suspect you''re missing line breaks for some reason. but then it  becomes a = [''zbc'',''2.3''] for i in range(0,5) exec(''e%d=%s'' %(i,a[i]))  but that will result in an index error on the reference to a[i] as shown  a [''zbc'',     '2.3'']  for i in range(0,5) ... print a[i] ... zbc 2.3 traceback (most recent  call last) file "stdin", line 2, in module indexerror list index out of range  if you avoided that issue, you''d get exec("e2.3=1") on the second pass through  the lopp, and that''s a syntax error too.
+    - python does not support the concept of passing a string "by reference" in the same way that vb.net does. so it might not be possible to do this without some more work. however, without seeing your code it''s definitely not possible to tell you what's wrong.
+    - python strings are immutable. there is no way the string can be changed inside the function. so what you really want is to pass a char buffer of some sort. you can create those in python using the ctypes module. please edit the question and paste a minimal snippet of the code so we can test and give more information.
+    - python installation is easy to understand and run through documentation
+    - There are no variable types needed in Python
+
+#- intent: subject
+#  examples: |
+#    - I want to take test
+#    -
+#    - I want to take exam
+#
+#- intent: goodbye
+#  examples: |
+#    - good afternoon
+#    - cu
+#    - good by
+#    - cee you later
+#    - good night
+#    - bye
+#    - goodbye
+#    - have a nice day
+#    - see you around
+#    - bye bye
+#    - see you later
+#
+#- intent: affirm
+#  examples: |
+#    - yes
+#    - y
+#    - indeed
+#    - of course
+#    - that sounds good
+#    - correct
+#
+#- intent: affirm
+#  examples: |
+#    - yes
+#
+#- intent: deny
+#  examples: |
+#    - no
+#    - n
+#    - never
+#    - I don't think so
+#    - don't like that
+#    - no way
+#    - not really
+#
+#- intent: mood_great
+#  examples: |
+#    - perfect
+#    - great
+#    - amazing
+#    - feeling like a king
+#    - wonderful
+#    - I am feeling very good
+#    - I am great
+#    - I am amazing
+#    - I am going to save the world
+#    - super stoked
+#    - extremely good
+#    - so so perfect
+#    - so good
+#    - so perfect
+#
+#- intent: mood_unhappy
+#  examples: |
+#    - my day was horrible
+#    - I am sad
+#    - I don't feel very well
+#    - I am disappointed
+#    - super sad
+#    - I'm so sad
+#    - sad
+#    - very sad
+#    - unhappy
+#    - not good
+#    - not very good
+#    - extremly sad
+#    - so saad
+#    - so sad
+#
+#- intent: bot_challenge
+#  examples: |
+#    - are you a bot?
+#    - are you a human?
+#    - am I talking to a bot?
+#    - am I talking to a human?
