@@ -9,6 +9,8 @@
 1. go to left panel
 2. open Training menu
 3. Update Model -> Train model
+4. Once model is trained -> go to Models-> make recent model as active
+   5)go to Conversation -> Start a new conversation by typing "Hi"
 
 # B ) Run on local system via git hub clone. https://github.com/sapan1812/qabot-final.git
 # OR
