@@ -11,6 +11,8 @@
 3. Update Model -> Train model
 
 # B ) Run on local system via git hub clone. https://github.com/sapan1812/qabot-final.git
+# OR
+# extract ZIP file provided/submitted by team.
 1) Go to project directory & open command prompt/terminal
 2) To train model (Skip if model is trained)
    "rasa train"
